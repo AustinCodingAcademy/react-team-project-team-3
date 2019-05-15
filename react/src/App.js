@@ -1,58 +1,39 @@
-import React, { Component } from 'react';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Route, Link } from "react-router-dom";
+import Login from './containers/Login';
+import Clients from './containers/Clients';
 
-class App extends Component {
+class App extends React.Component {
   state = {
-    clients: []
+    loggedIn: !!localStorage.getItem('JW_Token')
   }
 
-  componentDidMount = () => {
-    this.fetchClients();
+  logout = () => {
+    localStorage.clear();
+    this.setState({loggedIn: false});
+    window.location.href ='/';
   }
 
-  fetchClients = async () => {
-    const response = await fetch('/api/clients');
-    const clients = await response.json();
-    this.setState({ clients: clients });
-  }
-
-  addClient = async (e) => {
-    e.preventDefault(); // Don't refresh the browser
-    await fetch('/api/clients', {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "name": e.target.elements["name"].value,
-        "address" : e.target.elements["address"].value,
-        "phoneNumber":e.target.elements["phoneNumber"].value
-      })
-    });
-    this.fetchClients();
-  }
-
-  render() {
+  render = () => {
     return (
-      <main>
-        <form onSubmit={this.addClient}>
-          <label> Name
-            <input name="name" />
-          </label>
-          <label> Address
-            <input name="address" />
-          </label>
-          <label> Phone Number
-            <input name="phoneNumber" />
-          </label>
-          <input type="submit" />
-        </form>
-        <ul>
-          {this.state.clients.map(client => <li key={client.id}>{client.name}</li>)}
-        </ul>
-      </main>
+      <BrowserRouter>
+        <Link to="/login">Login</Link>
+        <br />
+        <Link to="/clients/">Clients</Link>
+        <br />
+        <a href="#" onClick={this.logout}>Logout</a>
+  
+  
+        {/* <Link to="/clients/new">Add a Client</Link> */}
+  
+        <Route exact path="/" component={this.state.loggedIn ? Clients : Login} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/clients/" component={Clients} />
+        {/* <Route exact path="/clients/new" component={() => <h1>Add a Client</h1>} /> */}
+      </BrowserRouter>
     );
   }
+
 }
 
 export default App;
