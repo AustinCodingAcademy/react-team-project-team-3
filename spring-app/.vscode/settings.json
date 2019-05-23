@@ -1,0 +1,9 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "C:\\Users\\laxmi_gurumoorthy\\React\\react-team-project-team-3\\spring-app\\spring-app.db",
+            "dialect": "SQLite",
+            "name": "Spring app"
+        }
+    ]
+}
