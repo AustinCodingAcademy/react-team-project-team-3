@@ -10,6 +10,7 @@ state={
 
 
   componentDidMount = async () => {
+    debugger
     const response = await fetch('/api/pets');
     const Pets = await response.json();
     debugger
@@ -18,19 +19,21 @@ state={
   }
 
 addPets = async (e) => {
-  e.PreventDefault();
-  await fetch ('/api/Pets',{
+ 
+  await fetch ('/api/pets',{
     method: "POST",
     headers:{
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      'id': e.target.elements.id.value,
+      'clientId': e.target.elements.id.value,
       'name': e.target.elements.name.value,
-      'Gender' : e.target.elements.Gender.value
+      'gender' : e.target.elements.Gender.value,
+      'altered' : e.target.elements.Gender.value,
     } )
   });
-  const response = await fetch ('/api/Pets');
+  debugger
+  const response = await fetch ('/api/pets');
   const Pets = await response.JSON();
   this.setState( {'Pets': Pets })
 }
