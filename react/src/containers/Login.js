@@ -38,7 +38,7 @@ export default class Login extends Component {
 
   render() {
     if (this.state.loggedIn) {
-      return <Redirect to = "/clients" />
+      return <Redirect to = "/Pets/" />
     }
     return (
       <Form onSubmit={this.onSubmit} inline>
