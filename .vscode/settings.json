@@ -1,0 +1,9 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "C:\\Users\\laxmi_gurumoorthy\\dell-java\\spring-app\\spring-app.db",
+            "dialect": "SQLite",
+            "name": "test"
+        }
+    ]
+}
