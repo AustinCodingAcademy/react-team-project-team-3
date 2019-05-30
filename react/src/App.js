@@ -11,6 +11,7 @@ import DeletePet from './containers/DeletePet';
 import UpdateClient from './containers/UpdateClient';
 
 
+
 class App extends React.Component {
   state = {
     loggedIn: !!localStorage.getItem('JW_Token')
@@ -25,7 +26,6 @@ class App extends React.Component {
   render = () => {
     return (
       <BrowserRouter>
-
         <nav className="navbar is-link" role="navigation" aria-label="main navigation">
           <div className="navbar-brand">
             <img src={require('./images/DellLogo.png')} alt="DellLogo" width="55" height="55" />
@@ -80,7 +80,7 @@ class App extends React.Component {
           <Route exact path="/pets/update" component={UpdatePet} />
           <Route exact path="/pets/delete" component={DeletePet} />
           <Route exact path="/clients/update" component={UpdateClient} />
-      
+     
       </BrowserRouter>
     );
   }
