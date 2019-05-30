@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
+import AddClientForm from '../components/AddClientForm';
+import ClientList from '../components/ClientList';
 
 export default class Clients extends Component {
   state = {
@@ -8,27 +9,25 @@ export default class Clients extends Component {
 
   componentDidMount = async () => {
     try {
-      const clientResponse = await fetch ('/api/clients', {
+      debugger
+      const response = await fetch('/api/clients', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('JW_Token')}`
         }
       })
-      const clients = await clientResponse.json();
-      this.setState({clients:clients});
-    }catch (error) {
+      const clients = await response.json();
+      this.props.match.clientsList = clients
+      this.setState({ 'clients': clients })
+    } catch (error) {
       console.error(error)
     }
-
   }
-
-
+  
   render() {
+    debugger
     return (
-      <div>
-        <ul>
-          {this.state.clients.map(client => <li>{client.name}</li>)}
-        </ul>
-        
+      <div className='container'>
+        <ClientList clientsList={this.state.clients} />
       </div>
     )
   }
